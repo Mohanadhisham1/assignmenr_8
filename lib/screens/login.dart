@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:myapp/Home.dart';
+import 'package:myapp/screens/signedin.dart';
 
 class Log_in extends StatefulWidget {
   const Log_in({super.key});
@@ -9,6 +11,10 @@ class Log_in extends StatefulWidget {
 }
 
 class _Log_inState extends State<Log_in> {
+  String Email = "moh.shaddouf1@gmail.com";
+  String Password = "mohanad2000";
+  int val1 = 0;
+  int val2 = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +29,13 @@ class _Log_inState extends State<Log_in> {
             Padding(
               padding: const EdgeInsets.all(50.0),
               child: TextField(
+                onChanged: (value) {
+                  if (Email == value) {
+                    val1 = 1;
+                  } else {
+                    val1 = 0;
+                  }
+                },
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green, width: 1)),
@@ -35,13 +48,20 @@ class _Log_inState extends State<Log_in> {
                     ),
                     prefixIcon: Icon(Icons.people)),
                 maxLines: 1,
-                maxLength: 20,
+                maxLength: 30,
                 textAlign: TextAlign.center,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(50.0),
               child: TextField(
+                onChanged: (value) {
+                  if (Password == value) {
+                    val2 = 1;
+                  } else {
+                    val2 = 0;
+                  }
+                },
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.green, width: 1)),
@@ -77,9 +97,30 @@ class _Log_inState extends State<Log_in> {
                         ),
                         actions: [
                           ElevatedButton(
-                              onPressed: () {}, child: Text("I wil wait")),
+                              onPressed: () {
+                                if (val1 == 1 && val2 == 1) {
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return signed();
+                                    },
+                                  ));
+                                } else {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return Home();
+                                  }));
+                                }
+                              },
+                              child: Text("I wil wait")),
                           ElevatedButton(
-                              onPressed: () {}, child: Text("no i can't wait"))
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return Home();
+                                  },
+                                ));
+                              },
+                              child: Text("no i can't wait"))
                         ],
                       );
                     },
